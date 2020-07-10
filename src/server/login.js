@@ -1,7 +1,9 @@
-import Mock from 'mockjs';
-
-Mock.mock('/login',{
-    "data|2": {
+import '../mock/login';
+const loginService = {
+    login() {
         
     }
-})
+}
+
+
+export default loginService;
