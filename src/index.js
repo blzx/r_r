@@ -5,6 +5,8 @@ import App from './App';
 import store from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import service from './config/http.js';
+React.$http = service;
 
 ReactDOM.render(
   // <React.StrictMode>

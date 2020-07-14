@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import loginService from '../server/login';
 
 // const layout = {
 //     labelCol: { span: 8 },
@@ -22,10 +23,28 @@ export default class Login extends Component{
         }
     }
 
+    componentWillMount = () => {
+        console.log(React.$http)
+        
+    }
+
+    login = () => {
+        loginService.login().then(
+            data => {
+                console.log(data);
+                // this.props.history.push('./home')
+            },
+            err => {
+                console.log(err)
+            }
+        );
+    }
+
     formRef = React.createRef();
     onFinish = values => {
         console.log('Success:', values);
-        this.props.history.push('./home')
+        // this.props.history.push('./home')
+        this.login();
     }
 
     onFinishFailed = errorInfo => {
