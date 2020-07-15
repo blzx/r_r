@@ -1,5 +1,6 @@
 import '../styles/Home.less';
 import Header from '../component/Header';
+// import { Counter } from '../features/counter/Counter';
 import React, { Component } from 'react';
 // import {Redirect,BrowserRouter as Router,Route} from 'react-router-dom';
 import { Layout, Menu, Breadcrumb } from 'antd';

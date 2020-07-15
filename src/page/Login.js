@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+// import { connect } from 'react-redux';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import loginService from '../server/login';
+// import loginStatus from '../store/action/action'
 
 // const layout = {
 //     labelCol: { span: 8 },
@@ -15,6 +17,22 @@ const tailLayout = {
     }
 }
 
+// const mapStateToProps = (state) => {
+//     return {
+//         state: state
+//     }
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         logined: userInfo => {
+//             dispatch(loginStatus(userInfo))
+//         }
+//     }
+// }
+
+
+
 export default class Login extends Component{
     constructor(props){
         super(props)
@@ -25,7 +43,7 @@ export default class Login extends Component{
 
     componentWillMount = () => {
         console.log(React.$http)
-        
+        console.log(this.props)
     }
 
     login = () => {
@@ -43,8 +61,11 @@ export default class Login extends Component{
     formRef = React.createRef();
     onFinish = values => {
         console.log('Success:', values);
-        // this.props.history.push('./home')
-        this.login();
+        this.props.history.push('./home');
+        // this.props.logined(values);
+        // setTimeout(() =>{console.log(this.props)},3000)
+        
+        // this.login();
     }
 
     onFinishFailed = errorInfo => {
@@ -126,3 +147,6 @@ export default class Login extends Component{
         )
     }
 }
+
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Login);

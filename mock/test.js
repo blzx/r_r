@@ -2,7 +2,7 @@ const Mock = require('mockjs');
 const express = require('express');
 
 const router = express.Router();
-router.use('login',(req,res) => {
+router.use('/',(req,res) => {
     console.log(req.body);
     let data = Mock.mock({
         "data|3": {

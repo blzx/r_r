@@ -26,6 +26,7 @@
     "react-redux": "^7.1.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
     "typescript": "^3.9.6"
   },
   "scripts": {
@@ -33,7 +34,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "mock": "node ./mock/server.js",
+    "mock": "nodemon ./mock/server.js",
     "dev": "concurrently \"npm start\" \"npm run mock\" "
   },
   "eslintConfig": {
