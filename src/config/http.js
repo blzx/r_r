@@ -3,6 +3,7 @@ import axios from 'axios';
 const service = axios.create({
     baseURL: '/', 
     timeOut: 5000,
+    headers: {'Content-Type': 'application/json'}
     // headers: {'X-Custom-Header': 'foobar'}
 });
 

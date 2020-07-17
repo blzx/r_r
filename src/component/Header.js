@@ -1,10 +1,14 @@
 import '../styles/Header.less';
 
 import React, { Component } from 'react';
+// import { useSelector, useDispatch } from 'react-redux'; // 在函数组件使用
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Menu, Avatar, Badge, Dropdown } from 'antd';
+import { Menu, Avatar, Badge, Dropdown, Input, Button } from 'antd';
 import { MailOutlined, SettingOutlined } from '@ant-design/icons';
+import { increment, decrement } from '../store/headerSlice';
+
 // const { SubMenu } = Menu;
 const crane = require("../images/crane.jpg");
 const menu = (
@@ -18,12 +22,33 @@ const menu = (
     </Menu>
 )
 
+// const dispatch = useDispatch()
+const mapStateToProps = (state) => {
+    return{state: state}
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        addOne: () => {
+            dispatch(increment())
+        },
+        addTwo: () => {
+            dispatch(decrement())
+        }
+    }
+}
+
 class Header extends Component{
     constructor(props) {
         super(props);
         this.state = {
             current: '1'
         }
+
+    }
+
+    componentWillMount = () => {
+        console.log(this.props)
     }
 
     static propTypes = {
@@ -47,6 +72,16 @@ class Header extends Component{
         this.props.history.push('/login')
     }
 
+    addNumOne = () => {
+        this.props.addOne();
+        console.log(this.props);
+    }
+
+    addNumTwo = () => {
+        this.props.addTwo();
+        console.log(this.props)
+    }
+
 
 
 
@@ -56,6 +91,11 @@ class Header extends Component{
         console.log(history,match,location)
         return (
             <div>
+                {/* <div>
+                    <Button onClick={this.addNumOne}>+1</Button>
+                    <Input value={this.props.state.headerReducer.num}></Input>
+                    <Button onClick={this.addNumTwo}>+2</Button>
+                </div> */}
                 <div className="nav">
                     <div className="navItem">
                         <Avatar src={crane} />
@@ -85,4 +125,4 @@ class Header extends Component{
     }
 }
 
-export default withRouter(Header); // 非路由组件可通过withRouter访问history location match staticContext
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Header)); // 非路由组件可通过withRouter访问history location match staticContext

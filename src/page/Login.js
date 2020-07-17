@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import loginService from '../server/login';
-// import loginStatus from '../store/action/action'
+// import { addTodo } from '../store/action/action'
+import { isLogin } from '../store/loginSlice';
 
 // const layout = {
 //     labelCol: { span: 8 },
@@ -17,23 +18,23 @@ const tailLayout = {
     }
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-//         state: state
-//     }
-// }
+const mapStateToProps = (state) => {
+    return {
+        state: state
+    }
+}
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         logined: userInfo => {
-//             dispatch(loginStatus(userInfo))
-//         }
-//     }
-// }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logined: (userInfo,firstLogin) => {
+            dispatch(isLogin(userInfo,firstLogin))
+        }
+    }
+}
 
 
 
-export default class Login extends Component{
+class Login extends Component{
     constructor(props){
         super(props)
         this.state = {
@@ -46,10 +47,11 @@ export default class Login extends Component{
         console.log(this.props)
     }
 
-    login = () => {
+    login = (userInfo) => {
         loginService.login().then(
             data => {
                 console.log(data);
+                // this.props.logined(userInfo,true);
                 // this.props.history.push('./home')
             },
             err => {
@@ -61,11 +63,9 @@ export default class Login extends Component{
     formRef = React.createRef();
     onFinish = values => {
         console.log('Success:', values);
-        this.props.history.push('./home');
-        // this.props.logined(values);
-        // setTimeout(() =>{console.log(this.props)},3000)
-        
-        // this.login();
+        this.login(values);
+        this.props.logined(values,true);
+        console.log(this.props)
     }
 
     onFinishFailed = errorInfo => {
@@ -77,12 +77,7 @@ export default class Login extends Component{
         this.formRef.current.resetFields()
     }
 
-    
-
-
     render() {
-        
-        
         return (
             <div>
                 <Form
@@ -149,4 +144,4 @@ export default class Login extends Component{
 }
 
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

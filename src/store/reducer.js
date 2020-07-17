@@ -27,6 +27,7 @@
 
 import { createSlice, createReducer, createAsyncThunk, createAction, current } from '@reduxjs/toolkit';
 import { addTodo } from './action/action'
+import { convertTypeAcquisitionFromJson } from 'typescript';
 const initialState = {
     counter: 0,
     rejectedActions: 0,
@@ -35,14 +36,28 @@ const initialState = {
 
 const todoReducer = createReducer(
     initialState,
-    builder => {
-        builder
-            .addCase(
-                [addTodo],
-                (state, action) => {
-
-                }
-            )
+    // builder => {
+    //     builder
+    //         .addCase(
+    //             [addTodo],
+    //             (state, action) => {
+    //                 return {...state,a:1}
+    //             }
+    //         )
+    //         .addMatcher(
+    //             action => action.type === 'todos/add',
+    //             (state, action) => {
+    //                 state.counter++;
+    //             }
+    //         )
+    //         .addDefaultCase(
+    //             (state,action) => {
+    //                 return state;
+    //             }
+    //         )
+    // }
+    {
+        [addTodo]: (state, action) => [1,2,3]
     }
 )
 export default todoReducer;
