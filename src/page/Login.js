@@ -51,8 +51,8 @@ class Login extends Component{
         loginService.login().then(
             data => {
                 console.log(data);
-                // this.props.logined(userInfo,true);
-                // this.props.history.push('./home')
+                this.props.logined(userInfo,true);
+                this.props.history.push('./home')
             },
             err => {
                 console.log(err)
