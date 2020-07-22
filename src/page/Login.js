@@ -5,6 +5,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import loginService from '../server/login';
 // import { addTodo } from '../store/action/action'
 import { isLogin } from '../store/loginSlice';
+import '../styles/login.less'
 
 // const layout = {
 //     labelCol: { span: 8 },
@@ -48,11 +49,15 @@ class Login extends Component{
     }
 
     login = (userInfo) => {
-        loginService.login().then(
+        loginService.login(userInfo).then(
             data => {
                 console.log(data);
-                this.props.logined(userInfo,true);
-                this.props.history.push('./home')
+                this.props.logined(userInfo,data.data.firstLogin);
+                if(data.data.firstLogin){
+                    this.props.history.push('/passwordchange')
+                }else{
+                    this.props.history.push('/home')
+                }
             },
             err => {
                 console.log(err)
@@ -79,7 +84,7 @@ class Login extends Component{
 
     render() {
         return (
-            <div>
+            <div className='loginContainer'>
                 <Form
                     // {...layout}
                     labelCol={{span:8}}
