@@ -11,16 +11,10 @@ import { increment, decrement } from '../store/headerSlice';
 
 // const { SubMenu } = Menu;
 const crane = require("../images/crane.jpg");
-const menu = (
-    <Menu>
-        <Menu.Item>
-            账户设置
-        </Menu.Item>
-        <Menu.Item>
-            修改密码
-        </Menu.Item>
-    </Menu>
-)
+
+
+
+
 
 // const dispatch = useDispatch()
 const mapStateToProps = (state) => {
@@ -67,6 +61,14 @@ class Header extends Component{
         this.setState({ current: e.key })
     }
 
+    settings = ({key,index}) => {
+        console.log(123)
+        console.log(key,index)
+        if(key === 'item_1'){
+            this.props.history.push('/passwordChange')
+        }
+    }
+
     logout = () => {
         console.log(this.props)
         this.props.history.push('/login')
@@ -87,6 +89,16 @@ class Header extends Component{
 
     render() {
         // const { current } = this.state;
+        const menu = (
+            <Menu onClick={this.settings}>
+                <Menu.Item>
+                    账户设置
+                </Menu.Item>
+                <Menu.Item>
+                    修改密码
+                </Menu.Item>
+            </Menu>
+        )
         const { history, match, location }  = this.props;
         console.log(history,match,location)
         return (
@@ -106,8 +118,8 @@ class Header extends Component{
                         </Badge>
                     </div>
                     <div className="navItem">
-                        <Dropdown overlay={menu} placement="bottomCenter" arrow>
-                        <SettingOutlined style={{color: '#fff'}}/>
+                        <Dropdown overlay={menu} placement="bottomCenter" arrow >
+                            <SettingOutlined style={{color: '#fff'}}/>
                         </Dropdown>
                     </div>
                     <div className="navItem" style={{color: '#fff'}} onClick={this.logout}>退出</div>

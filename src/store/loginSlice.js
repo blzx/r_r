@@ -5,7 +5,8 @@ const loginSlice = createSlice({
     name: 'login',
     initialState: {
         firstLogin: false,
-        userInfo: {}
+        userInfo: {},
+        token:null
     },
     reducers: {
         // logined: (state, action) => {  // 如果需要传参（payload）此写法错误
@@ -17,12 +18,13 @@ const loginSlice = createSlice({
                 state = action.payload;
                 return state;
             },
-            prepare: (userInfo, firstLogin) => {
+            prepare: (userInfo, firstLogin, token) => {
                 return {
-                    payload: {userInfo,firstLogin}
+                    payload: {userInfo,firstLogin,token}
                 }
             }
-        }
+        },
+        
     }
 })
 

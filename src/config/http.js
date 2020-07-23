@@ -1,9 +1,14 @@
 import axios from 'axios';
 
+let localToken = localStorage.getItem('token')
+console.log(localToken)
 const service = axios.create({
     baseURL: '/', 
     timeOut: 5000,
-    headers: {'Content-Type': 'application/json'}
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localToken
+    }
     // headers: {'X-Custom-Header': 'foobar'}
 });
 

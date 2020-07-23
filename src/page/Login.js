@@ -51,8 +51,12 @@ class Login extends Component{
     login = (userInfo) => {
         loginService.login(userInfo).then(
             data => {
-                console.log(data);
-                this.props.logined(userInfo,data.data.firstLogin);
+                // 将token存到本地缓存
+                if(data.token){
+                    localStorage.setItem('token',data.token);
+                }
+                // 将信息存入redux
+                this.props.logined(userInfo,data.data.firstLogin,data.token);
                 if(data.data.firstLogin){
                     this.props.history.push('/passwordchange')
                 }else{

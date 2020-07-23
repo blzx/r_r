@@ -2,29 +2,16 @@ import React, { Component } from 'react';
 import { Form, Input, Button } from 'antd';
 import Header from '../component/Header'
 
-// export default class passwordChange extends Component {
-//     constructor(props){
-//         super(props);
-//         state = {
-
-//         }
-//     }
-
-
-//     render(){
-//         return (
-//             <div>
-
-//             </div>
-//         )
-//     }
-// }
-
 function passwordChange(){
+    let modifyPassword = ()=> {
+        let data = {username: 'q',password: '123'}
+        React.$http.post('/api/modifipassword',data)
+    }
     return (
         <div>
             <Header />
             <div className='panel'>
+                <Button style={{position: 'fixed',right:20,bottom:20}} >回到首页</Button>
                 <Form
                     labelCol={{span:8}}
                     wrapperCol={{span:8}}
@@ -43,7 +30,7 @@ function passwordChange(){
                         <Input.Password />
                     </Form.Item>
                     <Form.Item wrapperCol={{span: 16,offset:4}}>
-                        <Button type='primary'>确认</Button>
+                        <Button type='primary' onClick={modifyPassword}>确认</Button>
                     </Form.Item>
                 </Form>
             </div>
