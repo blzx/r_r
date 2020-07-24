@@ -44,8 +44,8 @@ class Login extends Component{
     }
 
     componentWillMount = () => {
-        console.log(React.$http)
-        console.log(this.props)
+        // console.log(React.$http)
+        // console.log(this.props)
     }
 
     login = (userInfo) => {
@@ -56,25 +56,23 @@ class Login extends Component{
                     localStorage.setItem('token',data.token);
                 }
                 // 将信息存入redux
-                this.props.logined(userInfo,data.data.firstLogin,data.token);
-                if(data.data.firstLogin){
+                this.props.logined(userInfo,data.firstLogin,data.token);
+                if(data.firstLogin){
                     this.props.history.push('/passwordchange')
                 }else{
                     this.props.history.push('/home')
                 }
             },
             err => {
-                console.log(err)
+                React.$message.error(err.data.msg)
             }
         );
     }
 
     formRef = React.createRef();
     onFinish = values => {
-        console.log('Success:', values);
         this.login(values);
         this.props.logined(values,true);
-        console.log(this.props)
     }
 
     onFinishFailed = errorInfo => {
@@ -82,7 +80,6 @@ class Login extends Component{
     }
 
     onReset = () => {
-        console.log(this.formRef)
         this.formRef.current.resetFields()
     }
 

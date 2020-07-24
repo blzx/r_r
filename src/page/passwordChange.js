@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 import Header from '../component/Header'
 
@@ -11,7 +12,9 @@ function passwordChange(){
         <div>
             <Header />
             <div className='panel'>
-                <Button style={{position: 'fixed',right:20,bottom:20}} >回到首页</Button>
+                <Link to='/home'>
+                    <Button style={{position: 'fixed',right:20,bottom:20}} >回到首页</Button>
+                </Link>
                 <Form
                     labelCol={{span:8}}
                     wrapperCol={{span:8}}

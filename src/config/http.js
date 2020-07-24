@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 let localToken = localStorage.getItem('token')
-console.log(localToken)
+// axios.defaults.headers.common['token'] = localToken;
 const service = axios.create({
     baseURL: '/', 
     timeOut: 5000,
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': localToken
+        'token': localToken
     }
     // headers: {'X-Custom-Header': 'foobar'}
 });
@@ -119,7 +119,6 @@ const service = axios.create({
 // 请求拦截
 service.interceptors.request.use(
     config => {
-        console.log(config);
         return config
     },
     error => {
@@ -130,14 +129,14 @@ service.interceptors.request.use(
 // 响应拦截
 service.interceptors.response.use(
     res => {
-        console.log(res)
+        // console.log(res)
         if(res.status == 200){
             return Promise.resolve(res.data.data)
         }
         return Promise.reject({data: res.data})
     },
     error => {
-        console.log(error);
+        // console.log(error);
         if(error.response){
             return Promise.reject(error.response);
         }

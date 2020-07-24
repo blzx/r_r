@@ -1,4 +1,4 @@
-import React from 'react';
+import React  from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.less';
 import App from './App';
@@ -7,7 +7,10 @@ import store from './store/index';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import service from './config/http.js';
+import { message } from 'antd'
 React.$http = service;
+
+React.$message = message;
 
 ReactDOM.render(
   // <React.StrictMode>
